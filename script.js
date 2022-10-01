@@ -6,7 +6,12 @@ let currentPrice = document.querySelector('#current-price');
 let submitBtn = document.querySelector('#submit-btn');
 let outputBox = document.querySelector('#output-box');
 
-submitBtn.addEventListener("click", profitLossCalc);
+submitBtn.addEventListener("click", clickEventHandler );
+
+function clickEventHandler(){
+   
+    profitLossCalc(initialPrice.value, noOfStocks.value, currentPrice.value)
+}
 
 function profitLossCalc(initial,quantity,current){
     //profit 
@@ -14,7 +19,9 @@ function profitLossCalc(initial,quantity,current){
     {
        let profitValue = (current - initial)*quantity;
        let profitPerc = (profitValue/initial)*100;
-       console.log(`profit is ${profitValue} and profit percentage is ${profitPerc}%`)
+
+      showMessage(`profit is ${profitValue} and profit percentage is ${profitPerc}%`)
+      
     }
 
     //loss
@@ -22,12 +29,16 @@ function profitLossCalc(initial,quantity,current){
     else if(current<initial){
         let lossValue = ( initial - current)*quantity;
         let lossPerc = (lossValue/initial)*100;
-        console.log(`loss is ${lossValue} and loss percentage is ${lossPerc}%`)
+       showMessage(`loss is ${lossValue} and loss percentage is ${lossPerc}%`)
     }
 
     // equal 
     else {
-        console.log("No pain, No gain. No gain, No pain!")
+       showMessage("No pain, No gain. No gain, No pain!")
     }
+}
+
+function showMessage(message){
+    outputBox.innerHTML = message;
 }
 
